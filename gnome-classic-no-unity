@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# ubuntu 11.10
+# removes unity and sets gnome classic as default
+# uses gdm login screen
+#
+
+sudo apt-get update
+
+#get gnome classic
+sudo apt-get install gnome-session-fallback
+
+#gdm > lightdm
+sudo apt-get install gdm
+
+#remove lightdm
+sudo apt-get purge lightdm
+
+#appmenu removal
+sudo apt-get purge appmenu-gtk appmenu-gtk3 appmenu-qt indicator-appmenu
+
+#Remove unity
+sudo apt-get remove unity-lens-music unity-lens-applications unity-greeter unity-common unity-asset-pool unity-2d-launcher unity-2d libunity-misc4 libunity-2d-private0 gir1.2-unity-4.0
+
+#Remove the overlay scrollbar
+sudo apt-get purge liboverlay-scrollbar-0.2-0 liboverlay-scrollbar3-0.2-0 overlay-scrollbar appmenu-gtk appmenu-gtk3 appmenu-qt indicator-appmenu
+
+#remove compiz
+sudo apt-get remove compiz compiz-plugins-main-default libcompizconfig0
+
