@@ -8,6 +8,9 @@
 # if you see this error:
 # (SIOCSIFHWADDR: Cannot assign requested address)
 # just run the script again
+#
+# example : ./mac-changer e 11:22:33:44:55:66 (wont work, i know, just use an appropiate mac address)
+#
 # enjoy!
 
 newmac=$2
