@@ -1,0 +1,52 @@
+#!/bin/bash
+# little bash script that changes your mac
+# first parameter is the interface on which you want to change the mac
+# ------> e for eth0
+# ------> w for wlan0
+# second parameter is your new mac
+# ------> if no mac is specified, one will be randomly assigned
+# if you see this error:
+# (SIOCSIFHWADDR: Cannot assign requested address)
+# just run the script again
+# enjoy!
+
+newmac=$2
+
+if [ $2 =  ]
+then
+newmac=$(openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//')
+fi
+
+echo
+echo '################################'
+echo '### MACs for eth0 and wlan0: ###'
+  ifconfig eth0 | grep HWaddr | awk '{print $5}'
+  ifconfig wlan0 | grep HWaddr | awk '{print $5}'
+echo '###        New MAC is:       ###'
+echo '>>>>>' $newmac '<<<<<'
+echo '################################'
+echo
+
+function changemacwlan0 {
+ sudo ifconfig wlan0 down
+ sudo ifconfig wlan0 hw ether $newmac
+ sudo ifconfig wlan0 up
+}
+
+function changemaceth0 {
+ sudo ifconfig eth0 down
+ sudo ifconfig eth0 hw ether $newmac
+ sudo ifconfig eth0 up
+}
+
+if [ $1 = w ]
+then
+changemacwlan0
+fi
+
+if [ $1 = e ]
+then
+changemaceth0
+fi
+
+exit 0 
