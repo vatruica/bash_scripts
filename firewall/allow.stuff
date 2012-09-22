@@ -1,0 +1,45 @@
+#!/bin/bash
+
+echo '============================'
+echo '= Starting...'
+
+#allow ping
+echo '= ping ENABLED'
+iptables -A INPUT -p icmp --icmp-type 8  -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+iptables -A OUTPUT -p icmp --icmp-type 0  -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -p icmp --icmp-type 0  -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A OUTPUT -p icmp --icmp-type 8 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+
+#allow http
+echo '= http ENABLED'
+iptables -A INPUT -p tcp --sport 80  -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT
+
+#allow https
+echo '= https ENABLED'
+iptables -A INPUT -p tcp --sport 443  -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT
+
+#allow dns
+echo '= dns ENABLED'
+iptables -A INPUT -p udp --sport 53  -j ACCEPT
+iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
+
+#allow thunderbird
+echo '= thunderbird ENABLED'
+#imaps
+iptables -A INPUT -p tcp --sport 993  -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 993 -j ACCEPT
+#something else
+iptables -A INPUT -p tcp --sport 465  -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 465 -j ACCEPT
+
+#allow ssh to home
+echo '= ssh to home ENABLED'
+iptables -A INPUT -p tcp --sport 22222  -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 22222 -j ACCEPT
+
+#allow vnc to home
+echo '= vnc to home ENABLED'
+iptables -A INPUT -p tcp --sport 33333  -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 33333 -j ACCEPT

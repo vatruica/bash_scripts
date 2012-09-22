@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo '============================================'
+echo ''
+echo 'How would you want to set up your firewall?'
+echo ''
+echo '1. freeze the network, but allow loopback'
+echo '2. block certain ips'
+echo '3. block common attacks'
+echo '4. restore everything to default'
+

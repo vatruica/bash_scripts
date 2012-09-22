@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo '==========================='
+echo ''
+echo '= Blocking common attacks ='
+echo ''
+echo '==========================='
+
+#Force SYN packets check
+iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
+
+#Force Fragments packets check
+iptables -A INPUT -f -j DROP
+
+#XMAS packets
+iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
+
+#Drop all NULL packets
+iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP

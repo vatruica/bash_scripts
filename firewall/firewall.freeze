@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# blocking all network communications
+
+echo '==================================='
+echo 'Blocking all network communications'
+echo '==================================='
+
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+# Allow unlimited traffic on loopback
+
+echo '==================================='
+echo 'Allowing loopback to do its thing'
+echo '==================================='
+
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT

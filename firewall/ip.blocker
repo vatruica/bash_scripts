@@ -1,0 +1,8 @@
+BLOCKDB="/home/art3/server-scripts/ip.2block"
+IPS=$(grep -Ev "^#" $BLOCKDB)
+for i in $IPS
+do
+echo $i 'is now blocked'
+iptables -A INPUT -s $i -j DROP
+iptables -A OUTPUT -d $i -j DROP
+done

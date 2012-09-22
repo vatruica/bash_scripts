@@ -1,0 +1,15 @@
+#!/bin/bash
+# aRt3 scripts
+# script to delete old kernel versions
+# -> deletes old kernels
+
+CURRENT_VERSION=`uname -r`
+CURRENT_VERSION_FULL=`echo 'linux-image-'$CURRENT_VERSION`
+LIST=`dpkg --list | grep linux-image-3 | awk '{print $2}'`
+echo
+echo 'current kernel version is' $CURRENT_VERSION
+echo
+for i in $LIST; do test $i != $CURRENT_VERSION_FULL && echo 'removing ' $i && apt-get purge $i ; done
+echo
+update-grub2
+echo 'Done!'
