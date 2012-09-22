@@ -3,8 +3,7 @@
 # run this to run all the others at once
 
 NAME='run_after_fresh_install.sh'
-PWD=`pwd`
-LIST=`ls $pwd1`
+LIST=`ls`
 
 for i in $LIST 
 do
