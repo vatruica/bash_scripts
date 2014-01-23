@@ -8,8 +8,8 @@ cp ~/.bashrc ~/.bashrc.backup
 
 echo '
 # aRt3 aliases
-alias alive='ssh -t root@gotgameg.no-ip.org -p 22222'
-alias wakeup='ssh -t root@gotgameg.no-ip.org -p 22222'
+alias alive='ssh -t root@HOST -p PORT'
+alias wakeup='ssh -t root@HOST -p PORT'
 alias s='sudo shutdown -P 0'
 alias r='sudo shutdown -r 0'
 
